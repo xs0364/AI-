@@ -1,0 +1,313 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Design Tokens — Quant Trading Dashboard ──────────────────────── */
+/* 参考：Linear, TradingView, Vercel Dashboard, Raycast            */
+/* 所有颜色均通过 CSS Variables，Light/Dark 统一管理               */
+
+@theme inline {
+  /* Font family — Geist 为主，JetBrains Mono 为数字 */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* ── 品牌色 ── */
+  --color-brand-50: oklch(0.93 0.03 240);
+  --color-brand-100: oklch(0.85 0.06 240);
+  --color-brand-200: oklch(0.75 0.10 240);
+  --color-brand-300: oklch(0.62 0.15 240);
+  --color-brand-400: oklch(0.50 0.18 240);
+  --color-brand-500: oklch(0.45 0.20 240);
+  --color-brand-600: oklch(0.38 0.18 240);
+  --color-brand-700: oklch(0.30 0.15 240);
+  --color-brand-800: oklch(0.22 0.10 240);
+  --color-brand-900: oklch(0.15 0.06 240);
+
+  /* ── 交易专用色 ── */
+  --color-positive: var(--positive);
+  --color-positive-foreground: var(--positive-foreground);
+  --color-negative: var(--negative);
+  --color-negative-foreground: var(--negative-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  /* ── 信号色（亮色/暗色模式翻转） ── */
+  --color-buy: var(--buy);
+  --color-sell: var(--sell);
+  --color-neutral: var(--neutral);
+
+  /* ── 数据可视化 ── */
+  --color-chart-up: var(--chart-up);
+  --color-chart-down: var(--chart-down);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* ── 布局 ── */
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-topbar-bg: var(--topbar-bg);
+  --color-rightpanel-bg: var(--rightpanel-bg);
+
+  /* ── 背景深浅层级 ── */
+  --color-surface-0: var(--surface-0);  /* 最底 */
+  --color-surface-1: var(--surface-1);  /* 卡片 */
+  --color-surface-2: var(--surface-2);  /* 悬浮/选中 */
+  --color-surface-3: var(--surface-3);  /* 弹窗 */
+
+  /* ── 字体层级 ── */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-disabled: var(--text-disabled);
+
+  /* ── 边框 ── */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+
+  /* ── 间距系统 (8pt Grid) ── */
+  --spacing-px: 1px;
+  --spacing-0: 0px;
+  --spacing-1: 4px;    /* 0.25rem */
+  --spacing-2: 8px;    /* 0.5rem  — 基础单位 */
+  --spacing-3: 12px;   /* 0.75rem */
+  --spacing-4: 16px;   /* 1rem */
+  --spacing-5: 20px;   /* 1.25rem */
+  --spacing-6: 24px;   /* 1.5rem */
+  --spacing-8: 32px;   /* 2rem */
+  --spacing-10: 40px;  /* 2.5rem */
+  --spacing-12: 48px;  /* 3rem */
+  --spacing-16: 64px;  /* 4rem */
+
+  /* ── 圆角 ── */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;   /* 卡片圆角 */
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+
+  /* ── 阴影 ── */
+  --shadow-card: var(--shadow-card);
+  --shadow-elevated: var(--shadow-elevated);
+  --shadow-modal: var(--shadow-modal);
+
+  /* ── 文字尺寸 (符合 TradingView 读数优先) ── */
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 13px;   /* 常规字号 */
+  --text-lg: 15px;
+  --text-xl: 18px;
+  --text-2xl: 22px;    /* 卡片标题 */
+  --text-3xl: 28px;    /* 数字指标 */
+  --text-4xl: 36px;    /* 大数字 */
+
+  /* ── 继承 shadcn 的必需变量 ── */
+  --color-background: var(--surface-0);
+  --color-foreground: var(--text-primary);
+  --color-card: var(--surface-1);
+  --color-card-foreground: var(--text-primary);
+  --color-popover: var(--surface-3);
+  --color-popover-foreground: var(--text-primary);
+  --color-primary: var(--brand-500);
+  --color-primary-foreground: var(--positive-foreground);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--text-primary);
+  --color-muted: var(--surface-2);
+  --color-muted-foreground: var(--text-tertiary);
+  --color-accent: var(--surface-2);
+  --color-accent-foreground: var(--text-primary);
+  --color-destructive: var(--negative);
+  --color-border: var(--border-default);
+  --color-input: var(--border-default);
+  --color-ring: var(--brand-400);
+  --radius: 0.625rem;
+  --color-sidebar: var(--sidebar-bg);
+  --color-sidebar-foreground: var(--text-secondary);
+  --color-sidebar-primary: var(--brand-500);
+  --color-sidebar-primary-foreground: #fff;
+  --color-sidebar-accent: var(--surface-1);
+  --color-sidebar-accent-foreground: var(--text-primary);
+  --color-sidebar-border: var(--border-subtle);
+  --color-sidebar-ring: var(--brand-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  LIGHT MODE — 浅色主题                                          */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── 背景层级 ── */
+  --surface-0: #f5f5f4;      /* 最底背景 (类似 Linear) */
+  --surface-1: #ffffff;      /* 卡片 */
+  --surface-2: #f0f0ef;      /* 悬浮/选中 */
+  --surface-3: #ffffff;      /* 弹窗 */
+
+  /* ── 文字层级 ── */
+  --text-primary: #1c1c1a;
+  --text-secondary: #6b6b68;
+  --text-tertiary: #9c9c98;
+  --text-disabled: #c4c4c0;
+
+  /* ── 边框 ── */
+  --border-subtle: #e6e6e4;
+  --border-default: #d6d6d2;
+  --border-strong: #b0b0ab;
+
+  /* ── 品牌色 (蓝色) ── */
+  --brand-50: #eff6ff;
+  --brand-100: #dce8fb;
+  --brand-200: #b8d1f7;
+  --brand-300: #84b0f0;
+  --brand-400: #5090e8;
+  --brand-500: #2563eb;
+  --brand-600: #1d4ed8;
+  --brand-700: #1e40af;
+  --brand-800: #1e3a8a;
+
+  /* ── 交易涨跌色 ── */
+  --positive: #16a34a;       /* 涨 */
+  --positive-foreground: #ffffff;
+  --negative: #dc2626;       /* 跌 */
+  --negative-foreground: #ffffff;
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
+
+  /* 信号色 */
+  --buy: #16a34a;
+  --sell: #dc2626;
+  --neutral: #6b7280;
+
+  /* ── 图表 ── */
+  --chart-up: #16a34a;
+  --chart-down: #dc2626;
+  --chart-1: #2563eb;
+  --chart-2: #16a34a;
+  --chart-3: #d97706;
+  --chart-4: #8b5cf6;
+  --chart-5: #ec4899;
+
+  /* ── 面板 ── */
+  --sidebar-bg: #fafaf9;
+  --topbar-bg: #ffffff;
+  --rightpanel-bg: #fafaf9;
+
+  /* ── 阴影 ── */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-elevated: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-modal: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  DARK MODE — 深色主题                                            */
+/*  TradingView 风格深色：高对比度，低饱和度蓝底                  */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+.dark {
+  --surface-0: #131722;      /* TradingView 经典深色底 */
+  --surface-1: #1a1f2e;      /* 卡片 */
+  --surface-2: #242a3a;      /* 悬浮 */
+  --surface-3: #2a3040;      /* 弹窗 */
+
+  --text-primary: #e0e3eb;
+  --text-secondary: #969cb0;
+  --text-tertiary: #6a7090;
+  --text-disabled: #3c4260;
+
+  --border-subtle: #2a2e3e;
+  --border-default: #363a4a;
+  --border-strong: #4a4f60;
+
+  --brand-50: #1a2a4a;
+  --brand-100: #1e3a6a;
+  --brand-200: #2950a0;
+  --brand-300: #3b7dd8;
+  --brand-400: #5090e8;
+  --brand-500: #6b9ef0;
+  --brand-600: #88b4f7;
+  --brand-700: #a8cafc;
+  --brand-800: #c8ddfe;
+
+  /* 深色模式涨跌色：即使色相不变，在暗底上保持高对比 */
+  --positive: #22c55e;       /* 亮绿 */
+  --positive-foreground: #052e16;
+  --negative: #ef4444;       /* 亮红 */
+  --negative-foreground: #450a0a;
+  --warning: #f59e0b;
+  --warning-foreground: #451a03;
+
+  --buy: #22c55e;
+  --sell: #ef4444;
+  --neutral: #9ca3af;
+
+  --chart-up: #22c55e;
+  --chart-down: #ef4444;
+  --chart-1: #6b9ef0;
+  --chart-2: #22c55e;
+  --chart-3: #f59e0b;
+  --chart-4: #a78bfa;
+  --chart-5: #f472b6;
+
+  --sidebar-bg: #131722;
+  --topbar-bg: #1a1f2e;
+  --rightpanel-bg: #131722;
+
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-elevated: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-modal: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  BASE STYLES — 全局基础样式                                     */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    @apply border-border-subtle;
+  }
+
+  html {
+    @apply font-sans antialiased;
+    font-size: 13px; /* 基础字号 = 13px，8pt Grid 感知 */
+  }
+
+  body {
+    @apply bg-surface-0 text-text-primary;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* ── 数字字体 (所有数值自动用等宽字体) ── */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── 选中文字 ── */
+  ::selection {
+    @apply bg-brand-200/40 text-text-primary;
+  }
+
+  /* ── 滚动条 ── */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border-default rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-border-strong;
+  }
+
+  /* ── scroll-area 配合 ── */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-default) transparent;
+  }
+}

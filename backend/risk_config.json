@@ -1,0 +1,30 @@
+{
+  "single_trade_cap_pct": 0.05,
+  "single_fund_cap_pct": 0.15,
+  "cash_reserve_pct": 0.20,
+  "position_tiers": [
+    [80, 1.0],
+    [60, 0.75],
+    [40, 0.50],
+    [20, 0.25],
+    [0, 0.0]
+  ],
+  "stop_loss_fixed_pct": 0.08,
+  "stop_loss_atr_multiple": 2.0,
+  "stop_loss_trailing_activate_pct": 0.10,
+  "stop_loss_trailing_distance_pct": 0.05,
+  "stop_loss_time_days": 30,
+  "drawdown_tiers": [
+    [5, 1.0],
+    [10, 0.50],
+    [15, 0.20],
+    [100, 0.0]
+  ],
+  "sentiment_good_min": 40.0,
+  "sentiment_bad_max": 20.0,
+  "risk_weight_capital": 0.20,
+  "risk_weight_position": 0.20,
+  "risk_weight_stop_loss": 0.20,
+  "risk_weight_drawdown": 0.25,
+  "risk_weight_market": 0.15
+}
